@@ -1,10 +1,10 @@
 import query from '../database/dbpromise.js';
-import { decodeObject, checkDatabase, daysDiff } from '../functions/function.js';
+import { decodeObject, daysDiff } from '../functions/function.js';
 import { deleteSession, downloadMediaMessage, getSession, sendMessage } from '../middlewares/req.js';
 import { getImageReplyFromBard, getReplyFromBard } from './chatting/function.js';
-import fetch from 'node-fetch'
-import fs from 'fs'
-import path from 'path'
+import fetch from 'node-fetch';
+import fs from 'fs';
+import path from 'path';
 
 async function downloadAndSaveImages(images) {
     const downloadFolder = 'bardimages';
@@ -88,9 +88,7 @@ const extractImagesAndText = (inputText) => {
     const remainingText = lastIndex === 0 ? inputText : inputText.substring(0, lastIndex);
 
     // Remove identified image links from the remaining text
-    const cleanedRemainingText = images.reduce((text, image) => {
-        return text.replace(`![${image.caption}](${image.link})`, '');
-    }, remainingText);
+    const cleanedRemainingText = images.reduce((text, image) => text.replace(`![${image.caption}](${image.link})`, ''), remainingText);
 
     return { images, remainingText: cleanedRemainingText.trim() };
 };

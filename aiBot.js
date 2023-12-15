@@ -3,8 +3,7 @@ import { decodeObject, openAiText, getWordCount } from '../functions/function.js
 import { deleteSession, getSession, sendMessage } from '../middlewares/req.js'
 
 
-const webhook = async (m, wa, sessionId) => {
-    return new Promise(async (resolve, reject) => {
+const webhook = (m, wa, sessionId) => new Promise(async (resolve, reject) => {
         try {
 
             console.log({
@@ -103,8 +102,6 @@ const webhook = async (m, wa, sessionId) => {
             console.log(err)
         }
     })
-
-}
 
 
 
