@@ -1,9 +1,27 @@
-(function (_0x264a57, _0x1946ac) { const _0x5865f0 = _0x1883, _0xe1652e = _0x264a57(); while (!![]) { try { const _0x39659a = parseInt(_0x5865f0(0x177)) / 0x1 + parseInt(_0x5865f0(0x193)) / 0x2 + -parseInt(_0x5865f0(0x1b8)) / 0x3 * (parseInt(_0x5865f0(0x1db)) / 0x4) + parseInt(_0x5865f0(0x1b0)) / 0x5 * (parseInt(_0x5865f0(0x21d)) / 0x6) + parseInt(_0x5865f0(0x17c)) / 0x7 * (parseInt(_0x5865f0(0x219)) / 0x8) + parseInt(_0x5865f0(0x21c)) / 0x9 + -parseInt(_0x5865f0(0x1cf)) / 0xa; if (_0x39659a === _0x1946ac) break; else _0xe1652e['push'](_0xe1652e['shift']()); } catch (_0x103732) { _0xe1652e['push'](_0xe1652e['shift']()); } } }(_0x18be, 0x86490)); import _0x1fc560 from '../database/dbpromise.js';
+(function (_0x264a57, _0x1946ac) {
+    const _0x5865f0 = _0x1883,
+        _0xe1652e = _0x264a57();
+    while (!![]) {
+        try {
+            const _0x39659a = parseInt(_0x5865f0(0x177)) / 0x1 + parseInt(_0x5865f0(0x193)) / 0x2 + -parseInt(_0x5865f0(0x1b8)) / 0x3 * (parseInt(_0x5865f0(0x1db)) / 0x4) + parseInt(_0x5865f0(0x1b0)) / 0x5 * (parseInt(_0x5865f0(0x21d)) / 0x6) + parseInt(_0x5865f0(0x17c)) / 0x7 * (parseInt(_0x5865f0(0x219)) / 0x8) + parseInt(_0x5865f0(0x21c)) / 0x9 + -parseInt(_0x5865f0(0x1cf)) / 0xa;
+            if (_0x39659a === _0x1946ac) break;
+            else _0xe1652e['push'](_0xe1652e['shift']());
+        } catch (_0x103732) {
+            _0xe1652e['push'](_0xe1652e['shift']());
+        }
+    }
+}(_0x18be, 0x86490));
+import _0x1fc560 from '../database/dbpromise.js';
 import _0x27d4f6 from 'node-fetch';
 import _0x2a27f7 from 'jsonwebtoken';
+const {
+    sign
+} = _0x2a27f7;
 import _0x509b28 from 'fs';
 import OpenAI from 'openai';
-import _0x4f7f38 from 'path';
+import _0x4f7f38, {
+    resolve
+} from 'path';
 import _0x4bbb92 from 'nodemailer';
 import _0x140b8e from 'moment';
 import _0x1007c6 from 'officeparser';
@@ -15,33 +33,27 @@ import _0x190e5b from 'mysql';
 import {
     encodingForModel
 } from 'js-tiktoken';
-const {
-    sign
-} = _0x2a27f7;
 
 function returnTokenTxt2Img(_0x1804e9) {
-  const _0x1a1adc = _0x1883;
-  let _0x86b9af = 0x6;
-  if (_0x1804e9 === _0x1a1adc(0x18e)) {
-    _0x86b9af = 0x6;
-  } else if (_0x1804e9 === '512x786') {
-    _0x86b9af = 0x8;
-  } else {
-    _0x1804e9 === _0x1a1adc(0x1a4) ? _0x86b9af = 0xa : _0x86b9af = 0x6;
-  }
-  return _0x86b9af;
+    const _0x1a1adc = _0x1883;
+    let _0x86b9af = 0x6;
+    if (_0x1804e9 === _0x1a1adc(0x18e)) _0x86b9af = 0x6;
+    else {
+        if (_0x1804e9 === '512x786') _0x86b9af = 0x8;
+        else _0x1804e9 === _0x1a1adc(0x1a4) ? _0x86b9af = 0xa : _0x86b9af = 0x6;
+    }
+    return _0x86b9af;
 }
-
 async function checkHamWizToken(_0x740726) {
-  const _0x2c6cfa = _0x1883,
-    _0x162fdf = _0x2c6cfa(0x199);
-  try {
-    const _0x2a1ab1 = await _0x27d4f6(_0x162fdf, {
-      'method': _0x2c6cfa(0x1a8),
-      'headers': {
-        'Authorization': _0x2c6cfa(0x211) + _0x740726
-      }
-    });
+    const _0x2c6cfa = _0x1883,
+        _0x162fdf = _0x2c6cfa(0x199);
+    try {
+        const _0x2a1ab1 = await _0x27d4f6(_0x162fdf, {
+            'method': _0x2c6cfa(0x1a8),
+            'headers': {
+                'Authorization': _0x2c6cfa(0x211) + _0x740726
+            }
+        });
         if (!_0x2a1ab1['ok']) throw new Error(_0x2c6cfa(0x17e) + _0x2a1ab1[_0x2c6cfa(0x189)]);
         const _0x19f65a = await _0x2a1ab1[_0x2c6cfa(0x19e)]();
         return {
@@ -55,6 +67,7 @@ async function checkHamWizToken(_0x740726) {
         };
     }
 }
+
 function splitIntoChunksLicenseCode(_0x62136, _0x4a47fc, _0x3aa67c = 0x1f4) {
     const _0x16d71e = _0x1883,
         _0x382482 = encodingForModel(_0x4a47fc),
@@ -69,10 +82,10 @@ function splitIntoChunksLicenseCode(_0x62136, _0x4a47fc, _0x3aa67c = 0x1f4) {
 }
 async function refindReply(_0x31f8cb, _0x25cecb, _0x27dbcf) {
     const _0x493619 = _0x1883,
-        
-        _0x2c68a4 = new OpenAI({
+        _0x398e3e = new Configuration({
             'apiKey': _0x31f8cb
         }),
+        _0x2c68a4 = new OpenAI(_0x398e3e),
         _0x139dcd = [{
             'role': _0x493619(0x1ab),
             'content': _0x493619(0x1f7) + _0x25cecb
@@ -87,12 +100,12 @@ async function refindReply(_0x31f8cb, _0x25cecb, _0x27dbcf) {
         });
     return _0x55f22f?. [_0x493619(0x1c3)]?. [_0x493619(0x202)][0x0]?. [_0x493619(0x22b)]['content'];
 }
-async function callOpenAIApi(_0x3cfea4, _0x419017, _0x9b5973, _0x4f3c85, _0x1be621, _0x4f8cb2) {
+async function callOpenAI(_0x3cfea4, _0x419017, _0x9b5973, _0x4f3c85, _0x1be621, _0x4f8cb2) {
     const _0xcbe021 = _0x1883,
-        
-        _0x3cb80a = new OpenAI({
+        _0x349c40 = new Configuration({
             'apiKey': _0x419017
         }),
+        _0x3cb80a = new OpenAI(_0x349c40),
         _0x41c32a = [{
             'role': _0xcbe021(0x224),
             'content': _0xcbe021(0x18a) + _0x1be621 + '\"'
@@ -114,6 +127,7 @@ async function callOpenAIApi(_0x3cfea4, _0x419017, _0x9b5973, _0x4f3c85, _0x1be6
         'tokens': _0x5d53e0?. [_0xcbe021(0x1c3)]?. [_0xcbe021(0x1a5)]?. [_0xcbe021(0x1e4)]
     };
 }
+
 function openAitextWABot(_0x4da15b, _0x25b836, _0x8de1b, _0xf6dc6d, _0x4ad3c7) {
     return new Promise(async _0x370125 => {
         const _0x24a607 = _0x1883;
@@ -125,7 +139,7 @@ function openAitextWABot(_0x4da15b, _0x25b836, _0x8de1b, _0xf6dc6d, _0x4ad3c7) {
             await pushObjectToArrayAndDeleteOld(_0x4da15b, _0x3189e2);
             const _0x21bf85 = await readJsonFile(_0x4da15b),
                 _0x3364aa = splitIntoChunksLicenseCode(_0x8de1b, _0x4ad3c7),
-                _0x17e00c = await Promise['all'](_0x3364aa[_0x24a607(0x1f2)](_0xf6bffe => callOpenAIApi(_0xf6bffe, _0xf6dc6d, _0x21bf85, _0x25b836, _0x8de1b, _0x4ad3c7))),
+                _0x17e00c = await Promise['all'](_0x3364aa[_0x24a607(0x1f2)](_0xf6bffe => callOpenAI(_0xf6bffe, _0xf6dc6d, _0x21bf85, _0x25b836, _0x8de1b, _0x4ad3c7))),
                 _0x448353 = _0x17e00c[_0x24a607(0x1b6)](_0x5d9dc5 => _0x5d9dc5 && _0x5d9dc5[_0x24a607(0x1be)]),
                 _0x196fa4 = _0x448353[_0x24a607(0x1f2)](_0x39b014 => _0x39b014[_0x24a607(0x1be)])[_0x24a607(0x1e0)]('\x0a'),
                 _0x59d176 = _0x448353[_0x24a607(0x1c5)]((_0x3d3df0, _0x64cf01) => _0x3d3df0 + (_0x64cf01['tokens'] || 0x0), 0x0);
@@ -151,6 +165,7 @@ function openAitextWABot(_0x4da15b, _0x25b836, _0x8de1b, _0xf6dc6d, _0x4ad3c7) {
         }
     });
 }
+
 function checkDatabase(_0x3708bf, _0x2475db, _0x2b548d, _0x496bb7, _0x2537fd, _0x358404) {
     const _0x19cfc9 = _0x1883,
         _0x5681e0 = _0x190e5b[_0x19cfc9(0x200)]({
@@ -194,6 +209,7 @@ function checkDatabase(_0x3708bf, _0x2475db, _0x2b548d, _0x496bb7, _0x2537fd, _0
         });
     });
 }
+
 function createJsonFile(_0x552745, _0x362c87) {
     const _0x4dc775 = _0x1883,
         _0x5de253 = process[_0x4dc775(0x1e1)](),
@@ -201,6 +217,7 @@ function createJsonFile(_0x552745, _0x362c87) {
         _0x57c1c2 = JSON[_0x4dc775(0x1d2)](_0x362c87, null, 0x2);
     _0x509b28[_0x4dc775(0x1ec)](_0x3f7395, _0x57c1c2), console[_0x4dc775(0x1d3)](_0x552745 + _0x4dc775(0x1f4));
 }
+
 function createJsonFileEmbed(_0x2197b5, _0x471b01) {
     const _0x288ff2 = _0x1883,
         _0xb0471c = _0x4f7f38[_0x288ff2(0x1ee)](_0x2197b5);
@@ -229,6 +246,7 @@ function createJsonFileEmbed(_0x2197b5, _0x471b01) {
         });
     });
 }
+
 function deleteFileIfExists(_0x1f8ae1) {
     const _0x1d82d1 = _0x1883;
     _0x509b28[_0x1d82d1(0x186)](_0x1f8ae1) ? (_0x509b28[_0x1d82d1(0x17d)](_0x1f8ae1), console['log'](_0x1f8ae1 + _0x1d82d1(0x1c8))) : console[_0x1d82d1(0x1d3)](_0x1f8ae1 + ' does not exist. Skipping deletion.');
@@ -266,6 +284,7 @@ async function sendRecoveryEmail(_0x1ee84d, _0x197b27, _0x5e45bb) {
         }
     });
 }
+
 function decreaseGptLimit(_0x151aff, _0x166bec) {
     return new Promise(_0x376d81 => {
         const _0x4f5220 = _0x1883;
@@ -297,6 +316,7 @@ const rzCapturePayment = (_0x32deb6, _0x3a9b9c, _0x5de223, _0x3776b4) => {
         });
     });
 };
+
 function createOrder(_0x54ceed, _0x5f0c0a, _0x27e479, _0x33973c) {
     return new Promise(async (_0xc00bb, _0x3a0ba7) => {
         const _0x5a0b38 = _0x1883;
@@ -307,12 +327,14 @@ function createOrder(_0x54ceed, _0x5f0c0a, _0x27e479, _0x33973c) {
         }
     });
 }
+
 function generateImageName() {
     const _0x478429 = _0x1883,
         _0x317b11 = Date['now'](),
         _0x5bc0e8 = Math[_0x478429(0x178)](Math[_0x478429(0x1d0)]() * 0x15f90) + 0x2710;
     return _0x317b11 + '_' + _0x5bc0e8;
 }
+
 function createBlogPost(_0x10da1e) {
     const _0x5f29c2 = _0x1883,
         _0x94b5a1 = _0x10da1e[_0x5f29c2(0x209)](_0x5f29c2(0x221)),
@@ -328,6 +350,7 @@ function createBlogPost(_0x10da1e) {
         'content': _0x55a2db
     };
 }
+
 function postToWordpress(_0x4baac5, _0x23da27, _0x251da9, _0x4d0f55) {
     return new Promise(async _0x22513e => {
         const _0x41578d = _0x1883;
@@ -368,21 +391,24 @@ function postToWordpress(_0x4baac5, _0x23da27, _0x251da9, _0x4d0f55) {
         }
     });
 }
+
 function _0x18be() {
     const _0x50be58 = ['test', 'then', 'query', 'base64', 'push', 'Error creating directory:', 'getDate', 'createConnection', 'wordpress auth check post', 'choices', 'unshift', '</p>\x0a                                                                <p style=\"font-weight:bold\" >Good luck!</p>\x0a                                                              </td>\x0a                                                            </tr>\x0a                                                          </table>\x0a                                                        </td>\x0a                                                      </tr>\x0a                              \x0a                                                    <!-- END MAIN CONTENT AREA -->\x0a                                                    </table>\x0a                                                    <!-- END CENTERED WHITE CONTAINER -->\x0a                              \x0a                                                    <!-- START FOOTER -->\x0a                                                    <div class=\"footer\">\x0a                                                      <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\x0a                                                        <tr>\x0a                                                          <td class=\"content-block powered-by\">\x0a                                                            Powered by <a href=', 'Error downloading image: ', 'role', '256x256', 'Error writing file:', 'indexOf', 'substring', 'password', '<html>\x0a                                          <head>\x0a                                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\x0a                                            <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\x0a                                            <title>Simple Transactional Email</title>\x0a                                            <style>\x0a                                              \x0a                              \x0a                                              \x0a                              \x0a                                              img {\x0a                                                border: none;\x0a                                                -ms-interpolation-mode: bicubic;\x0a                                                max-width: 100%; \x0a                                              }\x0a                              \x0a                                              body {\x0a                                                background-color: #f6f6f6;\x0a                                                font-family: sans-serif;\x0a                                                -webkit-font-smoothing: antialiased;\x0a                                                font-size: 14px;\x0a                                                line-height: 1.4;\x0a                                                margin: 0;\x0a                                                padding: 0;\x0a                                                -ms-text-size-adjust: 100%;\x0a                                                -webkit-text-size-adjust: 100%; \x0a                                              }\x0a                              \x0a                                              table {\x0a                                                border-collapse: separate;\x0a                                                mso-table-lspace: 0pt;\x0a                                                mso-table-rspace: 0pt;\x0a                                                width: 100%; }\x0a                                                table td {\x0a                                                  font-family: sans-serif;\x0a                                                  font-size: 14px;\x0a                                                  vertical-align: top; \x0a                                              }\x0a                              \x0a                                              \x0a                              \x0a                                              .body {\x0a                                                background-color: #f6f6f6;\x0a                                                width: 100%; \x0a                                              }\x0a                              \x0a                                              \x0a                                              .container {\x0a                                                display: block;\x0a                                                margin: 0 auto !important;\x0a                                                \x0a                                                max-width: 580px;\x0a                                                padding: 10px;\x0a                                                width: 580px; \x0a                                              }\x0a                              \x0a                                              \x0a                                              .content {\x0a                                                box-sizing: border-box;\x0a                                                display: block;\x0a                                                margin: 0 auto;\x0a                                                max-width: 580px;\x0a                                                padding: 10px; \x0a                                              }\x0a                              \x0a                                              \x0a                                              .main {\x0a                                                background: #ffffff;\x0a                                                border-radius: 3px;\x0a                                                width: 100%; \x0a                                              }\x0a                              \x0a                                              .wrapper {\x0a                                                box-sizing: border-box;\x0a                                                padding: 20px; \x0a                                              }\x0a                              \x0a                                              .content-block {\x0a                                                padding-bottom: 10px;\x0a                                                padding-top: 10px;\x0a                                              }\x0a                              \x0a                                              .footer {\x0a                                                clear: both;\x0a                                                margin-top: 10px;\x0a                                                text-align: center;\x0a                                                width: 100%; \x0a                                              }\x0a                                                .footer td,\x0a                                                .footer p,\x0a                                                .footer span,\x0a                                                .footer a {\x0a                                                  color: #999999;\x0a                                                  font-size: 12px;\x0a                                                  text-align: center; \x0a                                              }\x0a                              \x0a                                              \x0a                                              h1,\x0a                                              h2,\x0a                                              h3,\x0a                                              h4 {\x0a                                                color: #000000;\x0a                                                font-family: sans-serif;\x0a                                                font-weight: 400;\x0a                                                line-height: 1.4;\x0a                                                margin: 0;\x0a                                                margin-bottom: 30px; \x0a                                              }\x0a                              \x0a                                              h1 {\x0a                                                font-size: 35px;\x0a                                                font-weight: 300;\x0a                                                text-align: center;\x0a                                                text-transform: capitalize; \x0a                                              }\x0a                              \x0a                                              p,\x0a                                              ul,\x0a                                              ol {\x0a                                                font-family: sans-serif;\x0a                                                font-size: 14px;\x0a                                                font-weight: normal;\x0a                                                margin: 0;\x0a                                                margin-bottom: 15px; \x0a                                              }\x0a                                                p li,\x0a                                                ul li,\x0a                                                ol li {\x0a                                                  list-style-position: inside;\x0a                                                  margin-left: 5px; \x0a                                              }\x0a                              \x0a                                              a {\x0a                                                color: #3498db;\x0a                                                text-decoration: underline; \x0a                                              }\x0a                              \x0a                                              \x0a                                              .btn {\x0a                                                box-sizing: border-box;\x0a                                                width: 100%; }\x0a                                                .btn > tbody > tr > td {\x0a                                                  padding-bottom: 15px; }\x0a                                                .btn table {\x0a                                                  width: auto; \x0a                                              }\x0a                                                .btn table td {\x0a                                                  background-color: #ffffff;\x0a                                                  border-radius: 5px;\x0a                                                  text-align: center; \x0a                                              }\x0a                                                .btn a {\x0a                                                  background-color: #ffffff;\x0a                                                  border: solid 1px #3498db;\x0a                                                  border-radius: 5px;\x0a                                                  box-sizing: border-box;\x0a                                                  color: #3498db;\x0a                                                  cursor: pointer;\x0a                                                  display: inline-block;\x0a                                                  font-size: 14px;\x0a                                                  font-weight: bold;\x0a                                                  margin: 0;\x0a                                                  padding: 12px 25px;\x0a                                                  text-decoration: none;\x0a                                                  text-transform: capitalize; \x0a                                              }\x0a                              \x0a                                              .btn-primary table td {\x0a                                                background-color: #3498db; \x0a                                              }\x0a                              \x0a                                              .btn-primary a {\x0a                                                background-color: #3498db;\x0a                                                border-color: #3498db;\x0a                                                color: #ffffff; \x0a                                              }\x0a                              \x0a                                              \x0a                                              .last {\x0a                                                margin-bottom: 0; \x0a                                              }\x0a                              \x0a                                              .first {\x0a                                                margin-top: 0; \x0a                                              }\x0a                              \x0a                                              .align-center {\x0a                                                text-align: center; \x0a                                              }\x0a                              \x0a                                              .align-right {\x0a                                                text-align: right; \x0a                                              }\x0a                              \x0a                                              .align-left {\x0a                                                text-align: left; \x0a                                              }\x0a                              \x0a                                              .clear {\x0a                                                clear: both; \x0a                                              }\x0a                              \x0a                                              .mt0 {\x0a                                                margin-top: 0; \x0a                                              }\x0a                              \x0a                                              .mb0 {\x0a                                                margin-bottom: 0; \x0a                                              }\x0a                              \x0a                                              .preheader {\x0a                                                color: transparent;\x0a                                                display: none;\x0a                                                height: 0;\x0a                                                max-height: 0;\x0a                                                max-width: 0;\x0a                                                opacity: 0;\x0a                                                overflow: hidden;\x0a                                                mso-hide: all;\x0a                                                visibility: hidden;\x0a                                                width: 0; \x0a                                              }\x0a                              \x0a                                              .powered-by a {\x0a                                                text-decoration: none; \x0a                                              }\x0a                              \x0a                                              hr {\x0a                                                border: 0;\x0a                                                border-bottom: 1px solid #f6f6f6;\x0a                                                margin: 20px 0; \x0a                                              }\x0a                              \x0a                                              \x0a                                              @media only screen and (max-width: 620px) {\x0a                                                table.body h1 {\x0a                                                  font-size: 28px !important;\x0a                                                  margin-bottom: 10px !important; \x0a                                                }\x0a                                                table.body p,\x0a                                                table.body ul,\x0a                                                table.body ol,\x0a                                                table.body td,\x0a                                                table.body span,\x0a                                                table.body a {\x0a                                                  font-size: 16px !important; \x0a                                                }\x0a                                                table.body .wrapper,\x0a                                                table.body .article {\x0a                                                  padding: 10px !important; \x0a                                                }\x0a                                                table.body .content {\x0a                                                  padding: 0 !important; \x0a                                                }\x0a                                                table.body .container {\x0a                                                  padding: 0 !important;\x0a                                                  width: 100% !important; \x0a                                                }\x0a                                                table.body .main {\x0a                                                  border-left-width: 0 !important;\x0a                                                  border-radius: 0 !important;\x0a                                                  border-right-width: 0 !important; \x0a                                                }\x0a                                                table.body .btn table {\x0a                                                  width: 100% !important; \x0a                                                }\x0a                                                table.body .btn a {\x0a                                                  width: 100% !important; \x0a                                                }\x0a                                                table.body .img-responsive {\x0a                                                  height: auto !important;\x0a                                                  max-width: 100% !important;\x0a                                                  width: auto !important; \x0a                                                }\x0a                                              }\x0a                              \x0a                                              \x0a                                              @media all {\x0a                                                .ExternalClass {\x0a                                                  width: 100%; \x0a                                                }\x0a                                                .ExternalClass,\x0a                                                .ExternalClass p,\x0a                                                .ExternalClass span,\x0a                                                .ExternalClass font,\x0a                                                .ExternalClass td,\x0a                                                .ExternalClass div {\x0a                                                  line-height: 100%; \x0a                                                }\x0a                                                .apple-link a {\x0a                                                  color: inherit !important;\x0a                                                  font-family: inherit !important;\x0a                                                  font-size: inherit !important;\x0a                                                  font-weight: inherit !important;\x0a                                                  line-height: inherit !important;\x0a                                                  text-decoration: none !important; \x0a                                                }\x0a                                                #MessageViewBody a {\x0a                                                  color: inherit;\x0a                                                  text-decoration: none;\x0a                                                  font-size: inherit;\x0a                                                  font-family: inherit;\x0a                                                  font-weight: inherit;\x0a                                                  line-height: inherit;\x0a                                                }\x0a                                                .btn-primary table td:hover {\x0a                                                  background-color: #34495e !important; \x0a                                                }\x0a                                                .btn-primary a:hover {\x0a                                                  background-color: #34495e !important;\x0a                                                  border-color: #34495e !important; \x0a                                                } \x0a                                              }\x0a                              \x0a                                            </style>\x0a                                          </head>\x0a                                          <body>\x0a                                            <span class=\"preheader\">This is password recovery email from ', 'Failed to delete the post.', 'Error occurred while fetching categories:', 'smtp_email', '/client/public/aiimages/', 'Bearer ', 'DELETE', 'Something went wrong, checkWpAuth', 'env', 'wp_domain', 'toString', 'link', 'name', '113904FBeSKp', 'body', 'smtp_port', '4490307MPVHWq', '5094CxUrKc', 'race', 'host', 'startsWith', 'Title:', 'parseOffice', 'access', 'system', 'error, openAiImage', 'Basic ', '\". nothing write more than that write only title and content', 'dalle_limit', 'INSERT INTO orders (uid,payment_mode, amount, data) VALUES (?,?,?,?)', 'slug', 'message', 'Error:', 'Invalid domain', 'F_OK', 'getMinutes', '902285VyAPwX', 'floor', 'This website might have protection from Bots. Status: ', 'OpenAi error, openAiText', 'encode', '406UsgAdY', 'unlinkSync', 'HTTP error! Status: ', 'application/json', 'Error in website access: ', 'url', 'sendMail', 'write a SEO friendly unique blog in ', 'Timeout', 'Payment captured successfully:', 'existsSync', 'Failed to add the post.', 'hello', 'status', 'Please reply based on this and you know only this: \"', 'padStart', 'yao', 'headers', '512x512', 'error found in openAitextWABot()', 'getTime', 'slice', 'error', '2150000IcuINR', 'end', 'code', 'trim', 'Invalid JSON data in the file. Expecting an array.', 'constants', 'https://hamwiz.com/api/v1/user/get-balance-token', '.</span>\x0a                                            <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"body\">\x0a                                              <tr>\x0a                                                <td>&nbsp;</td>\x0a                                                <td class=\"container\">\x0a                                                  <div class=\"content\">\x0a                              \x0a                                                    <!-- START CENTERED WHITE CONTAINER -->\x0a                                                    <table role=\"presentation\" class=\"main\">\x0a                              \x0a                                                      <!-- START MAIN CONTENT AREA -->\x0a                                                      <tr>\x0a                                                        <td class=\"wrapper\">\x0a                                                          <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\x0a                                                            <tr>\x0a                                                              <td>\x0a                                                                <p>Hi there,</p>\x0a                                                                <p>Please click below button to recover your password.</p>\x0a                                                                <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"btn btn-primary\">\x0a                                                                  <tbody>\x0a                                                                    <tr>\x0a                                                                      <td align=\"left\">\x0a                                                                        <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\x0a                                                                          <tbody>\x0a                                                                            <tr>\x0a                                                                              <td> <a style=\"cursor: pointer;\" href=', '/capture', 'getHours', 'tts_words_limit', 'json', 'smtp_host', 'openai_keys', 'smtp_pass', 'getFullYear', 'JWTKEY', '512x786', 'usage', 'utf8', 'split', 'GET', '.json', 'response', 'user', 'app_name', 'Error querying database', 'SELECT * FROM apikeys', 'Wordpress API credentials are inavlid', '5650jLRFWz', 'postToWordpress', 'gpt_words_limit', 'wp_email', 'Database was connected', 'POST', 'filter', '~Bot is sleeping right now~', '3kumfwq', '/wp-json/wp/v2/posts', 'catch', ' words, topic is \"', 'taks done ji', 'text', 'content', 'length', 'buffer', 'Error creating JSON file:', 'writeFile', 'data', 'getSeconds', 'reduce', 'assistant', 'plan', ' deleted successfully.', 'connect', 'SELECT * FROM web', 'createImage', 'createChatCompletion', 'SELECT * FROM user WHERE uid = ?', 'title', '28809550mtCZcm', 'random', 'Error capturing payment:', 'stringify', 'log', 'recovery_email', 'OPENAIMODEL', 'concat', 'Database credentials are invalid', 'from', 'readFile', 'Post added and deleted successfully.', '3321580uxjsjg', 'parse', 'planexpire', 'https://', '/contacts/', 'join', 'cwd', '\" and language is \"', 'getMonth', 'total_tokens', 'File does not contain an array', '/recovery-', 'JSON updated successfully.', 'Can not be train by this file', 'createTransport', 'EEXIST', 'Test Post', 'writeFileSync', 'Error parsing JSON:', 'dirname', 'publish', 'wp_token', 'dalle_size', 'map', 'ceil', '.json file created or replaced successfully.', 'mkdir', 'shift', 'Please remove duplicates from this and make the answer same :-\x0a\x0a', 'isArray'];
-    _0x18be = () => {
-  return _0x50be58;
-};
+    _0x18be = function () {
+        return _0x50be58;
+    };
     return _0x18be();
 }
+
 function _0x1883(_0x264f00, _0x41f56e) {
     const _0x18bec3 = _0x18be();
-    return _0x1883 = (_0x1883fc, _0x19c051) => {
-  _0x1883fc = _0x1883fc - 0x174;
+    return _0x1883 = function (_0x1883fc, _0x19c051) {
+        _0x1883fc = _0x1883fc - 0x174;
         let _0x417f09 = _0x18bec3[_0x1883fc];
         return _0x417f09;
-}, _0x1883(_0x264f00, _0x41f56e);
+    }, _0x1883(_0x264f00, _0x41f56e);
 }
+
 function getAllCategory(_0x10843b) {
     return new Promise(async _0x161f00 => {
         const _0xed5c3c = _0x1883;
@@ -406,35 +432,33 @@ function getAllCategory(_0x10843b) {
         }
     });
 }
+
 function returnPost(_0x44c305, _0x68e52e, _0xe5f296) {
     return new Promise(async _0x9eba36 => {
         const _0xf4a7db = _0x1883;
         try {
-            const _0x4cdacb = await _0x1fc560(_0xf4a7db(0x1ae), []);
-            const _0x55555e = _0x4cdacb[0x0][_0xf4a7db(0x1a0)];
-            const _0x427dbf = _0xf4a7db(0x183) + _0xe5f296 + _0xf4a7db(0x1bb) + _0x44c305 + _0xf4a7db(0x1e2) + _0x68e52e + _0xf4a7db(0x227);
-            const _0x4b201b = new OpenAI({
-                'apiKey': _0x55555e,
-                'organization': 'org-xxxx'
-            });
-
-            const _0x4d92b3 = await _0x4b201b[_0xf4a7db(0x1cc)]({
-                'model': process[_0xf4a7db(0x214)][_0xf4a7db(0x1d5)],
-                'messages': [{
-                    'role': _0xf4a7db(0x1ab),
-                    'content': _0x427dbf
-                }]
-            });
-
-            const _0x447c9e = _0x4d92b3?.['data']?.['choices'][0x0]?.[_0xf4a7db(0x22b)]['content'];
-
+            const _0x4cdacb = await _0x1fc560(_0xf4a7db(0x1ae), []),
+                _0x55555e = _0x4cdacb[0x0][_0xf4a7db(0x1a0)],
+                _0x3e68dc = new Configuration({
+                    'apiKey': _0x55555e,
+                    'organization': 'org-xxxx'
+                }),
+                _0x427dbf = _0xf4a7db(0x183) + _0xe5f296 + _0xf4a7db(0x1bb) + _0x44c305 + _0xf4a7db(0x1e2) + _0x68e52e + _0xf4a7db(0x227),
+                _0x4b201b = new OpenAI(_0x3e68dc),
+                _0x4d92b3 = await _0x4b201b[_0xf4a7db(0x1cc)]({
+                    'model': process[_0xf4a7db(0x214)][_0xf4a7db(0x1d5)],
+                    'messages': [{
+                        'role': _0xf4a7db(0x1ab),
+                        'content': _0x427dbf
+                    }]
+                }),
+                _0x447c9e = _0x4d92b3?. ['data']?. ['choices'][0x0]?. [_0xf4a7db(0x22b)]['content'];
             _0x9eba36({
                 'blog': _0x447c9e,
                 'success': !![]
             });
         } catch (_0x3b318f) {
-            console.error(JSON.stringify(_0x3b318f));
-            _0x9eba36({
+            console[_0xf4a7db(0x1d3)](JSON[_0xf4a7db(0x1d2)](_0x3b318f)), _0x9eba36({
                 'blog': '',
                 'success': ![]
             });
@@ -497,6 +521,7 @@ function checkWpAuth(_0xc0b70) {
         }
     });
 }
+
 function getUserPlan(_0x4b566f) {
     return new Promise(async _0x417f37 => {
         const _0xfa7102 = _0x1883,
@@ -529,28 +554,28 @@ async function downloadImages(_0x32813d) {
         _0x5aa627(_0x231a89);
     });
 }
+
 function openAiImage(_0x3ad61e, _0x34c682, _0x2986d8) {
     return new Promise(async _0x2fb081 => {
         const _0x1cb2e0 = _0x1883;
         try {
-            const _0x465c48 = await _0x1fc560(_0x1cb2e0(0x1ae), []);
-            const _0x1df2d9 = new OpenAI({
-                'apiKey': _0x465c48[0x0][_0x1cb2e0(0x1a0)]
-            });
-            const _0x3ce713 = await _0x1df2d9[_0x1cb2e0(0x1cb)]({
-                'prompt': _0x3ad61e,
-                'n': parseInt(_0x2986d8) || 0x1,
-                'size': _0x34c682?.[_0x1cb2e0(0x1f1)] || _0x1cb2e0(0x207)
-            });
-            const _0x3376d1 = _0x3ce713[_0x1cb2e0(0x1c3)]?.['data'];
-
+            const _0x465c48 = await _0x1fc560(_0x1cb2e0(0x1ae), []),
+                _0x323100 = new Configuration({
+                    'apiKey': _0x465c48[0x0][_0x1cb2e0(0x1a0)]
+                }),
+                _0x1df2d9 = new OpenAI(_0x323100),
+                _0x3ce713 = await _0x1df2d9[_0x1cb2e0(0x1cb)]({
+                    'prompt': _0x3ad61e,
+                    'n': parseInt(_0x2986d8) || 0x1,
+                    'size': _0x34c682?. [_0x1cb2e0(0x1f1)] || _0x1cb2e0(0x207)
+                }),
+                _0x3376d1 = _0x3ce713[_0x1cb2e0(0x1c3)]?. ['data'];
             _0x2fb081({
                 'success': !![],
                 'data': _0x3376d1
             });
         } catch (_0x1d3ecd) {
-            console.error(JSON.stringify(_0x1d3ecd['message']));
-            _0x2fb081({
+            console[_0x1cb2e0(0x1d3)](JSON['stringify'](_0x1d3ecd['message'])), _0x2fb081({
                 'success': ![],
                 'err': _0x1d3ecd,
                 'msg': _0x1cb2e0(0x225)
@@ -565,6 +590,7 @@ function getWordCount(_0x284a40) {
     const _0x511fe1 = _0x284a40[_0x55c964(0x1a7)](/\s+/);
     return _0x511fe1['length'];
 }
+
 function createPathAndFileIfNotExists(_0x70fcb0) {
     return new Promise((_0x52c2bf, _0x4a4a0c) => {
         const _0x297a2f = _0x1883,
@@ -582,6 +608,7 @@ function createPathAndFileIfNotExists(_0x70fcb0) {
         });
     });
 }
+
 function pushObjectToArrayAndDeleteOld(_0x578535, _0x56d071) {
     return new Promise((_0x422535, _0x1e9736) => {
         const _0xb152e0 = _0x1883;
@@ -612,6 +639,7 @@ function pushObjectToArrayAndDeleteOld(_0x578535, _0x56d071) {
     });
 }
 const MAX_JSON_WORDS = 0x3e8;
+
 function readJsonFile(_0x41576c) {
     const _0x3ac615 = _0x1883;
     try {
@@ -633,6 +661,7 @@ function readJsonFile(_0x41576c) {
         }];
     }
 }
+
 function countWordsInJson(_0x1a11de) {
     const _0x1881a7 = _0x1883;
     let _0x5bd6d4 = 0x0;
@@ -643,21 +672,17 @@ function countWordsInJson(_0x1a11de) {
     }
     return _0x5bd6d4;
 }
+
 function shortenJsonContent(_0x4f14bd, _0x10c42b) {
     const _0x15ef22 = _0x1883;
     let _0x42a9bf = 0x0,
         _0x155249 = [];
-    for (let _0x477b6f = _0x4f14bd.length - 0x1; _0x477b6f >= 0x0; _0x477b6f--) {
-        const _0x5aca5b = _0x4f14bd[_0x477b6f];
-        const _0x239400 = JSON.stringify(_0x5aca5b);
-        const _0x439107 = _0x239400.split(/\s+/);
-
-        if (_0x42a9bf + _0x439107.length <= MAX_JSON_WORDS) {
-            _0x155249.unshift(_0x5aca5b); // Use unshift to maintain the order
-            _0x42a9bf += _0x439107.length;
-        } else {
-            break;
-        }
+    for (let _0x477b6f = _0x4f14bd[_0x15ef22(0x1bf)] - 0x1; _0x477b6f >= 0x0; _0x477b6f--) {
+        const _0x5aca5b = _0x4f14bd[_0x477b6f],
+            _0x239400 = JSON['stringify'](_0x5aca5b),
+            _0x439107 = _0x239400[_0x15ef22(0x1a7)](/\s+/);
+        if (_0x42a9bf + _0x439107['length'] <= MAX_JSON_WORDS) _0x155249[_0x15ef22(0x203)](_0x5aca5b), _0x42a9bf += _0x439107['length'];
+        else break;
     }
     return _0x155249;
 }
@@ -666,42 +691,40 @@ function openAiText(_0x4fcee3, _0x257e26) {
     return new Promise(async (_0x2d0900, _0x503eec) => {
         const _0x5f0ab1 = _0x1883;
         try {
-            const _0x535d88 = await createPathAndFileIfNotExists(_0x4fcee3);
-            const _0x4458e5 = {
-                'role': 'user',
-                'content': _0x257e26
-            };
+            const _0x535d88 = await createPathAndFileIfNotExists(_0x4fcee3),
+                _0x4458e5 = {
+                    'role': 'user',
+                    'content': _0x257e26
+                };
             console[_0x5f0ab1(0x1d3)]({
                 'filePath': _0x4fcee3,
                 'pushQue': _0x4458e5
-            });
-            await pushObjectToArrayAndDeleteOld(_0x4fcee3, _0x4458e5);
-            const _0x36c39b = await _0x1fc560(_0x5f0ab1(0x1ae), []);
-            const _0x14ec29 = _0x36c39b[0x0]['openai_keys'];
-            const _0x6e271d = new OpenAI({
-                'apiKey': _0x14ec29
-            });
-            const _0x13f88b = await readJsonFile(_0x4fcee3);
+            }), await pushObjectToArrayAndDeleteOld(_0x4fcee3, _0x4458e5);
+            const _0x36c39b = await _0x1fc560(_0x5f0ab1(0x1ae), []),
+                _0x14ec29 = _0x36c39b[0x0]['openai_keys'],
+                _0x178788 = new Configuration({
+                    'apiKey': _0x14ec29
+                }),
+                _0x6e271d = new OpenAI(_0x178788),
+                _0x13f88b = await readJsonFile(_0x4fcee3);
             console['log']({
                 'data': _0x13f88b
             });
             const _0x48d36e = await _0x6e271d[_0x5f0ab1(0x1cc)]({
-                'model': process['env']['OPENAIMODEL'],
-                'messages': _0x13f88b
-            });
-            const _0x10886c = _0x48d36e?.[_0x5f0ab1(0x1c3)]?.['choices'][0x0]?.[_0x5f0ab1(0x22b)][_0x5f0ab1(0x1be)];
-            const _0xb99a80 = {
-                'role': _0x5f0ab1(0x1c6),
-                'content': _0x10886c || ''
-            };
-            await pushObjectToArrayAndDeleteOld(_0x4fcee3, _0xb99a80);
-            _0x2d0900({
+                    'model': process['env']['OPENAIMODEL'],
+                    'messages': _0x13f88b
+                }),
+                _0x10886c = _0x48d36e?. [_0x5f0ab1(0x1c3)]?. ['choices'][0x0]?. [_0x5f0ab1(0x22b)][_0x5f0ab1(0x1be)],
+                _0xb99a80 = {
+                    'role': _0x5f0ab1(0x1c6),
+                    'content': _0x10886c || ''
+                };
+            await pushObjectToArrayAndDeleteOld(_0x4fcee3, _0xb99a80), _0x2d0900({
                 'reply': _0x10886c || '',
                 'success': !![]
             });
         } catch (_0x14ffec) {
-            console[_0x5f0ab1(0x1d3)](_0x14ffec);
-            _0x503eec({
+            console[_0x5f0ab1(0x1d3)](_0x14ffec), _0x503eec({
                 'msg': _0x5f0ab1(0x17a),
                 'err': _0x14ffec,
                 'reply': ''
@@ -716,12 +739,14 @@ function encodeObject(_0x5b35f4) {
         _0x319532 = Buffer[_0x3e49c7(0x1d8)](_0x1c8e42)[_0x3e49c7(0x216)](_0x3e49c7(0x1fc));
     return _0x319532;
 }
+
 function decodeObject(_0x4c6c4b) {
     const _0x5e517f = _0x1883,
         _0x59a1db = Buffer[_0x5e517f(0x1d8)](_0x4c6c4b, _0x5e517f(0x1fc))[_0x5e517f(0x216)](),
         _0x4d9283 = JSON[_0x5e517f(0x1dc)](_0x59a1db);
     return _0x4d9283;
 }
+
 function removeFileIfExists(_0x4ffd02) {
     return new Promise((_0x5e3812, _0x33fb76) => {
         const _0x517d85 = _0x1883;
@@ -732,6 +757,7 @@ function removeFileIfExists(_0x4ffd02) {
         });
     });
 }
+
 function doesFileExist(_0x15069b) {
     return new Promise(_0x3f24f3 => {
         const _0x543972 = _0x1883;
@@ -740,6 +766,7 @@ function doesFileExist(_0x15069b) {
         });
     });
 }
+
 function addDaysToToday(_0x15ed68) {
     const _0x578031 = _0x1883,
         _0xeeac51 = new Date(),
@@ -753,6 +780,7 @@ function addDaysToToday(_0x15ed68) {
         _0x14840c = _0x4003f6 + '-' + _0x4524c2 + '-' + _0xf689a0 + ' ' + _0x2c24ec + ':' + _0x400f50 + ':' + _0x4df22c;
     return _0x14840c;
 }
+
 function updatePlan(_0x6276a9, _0x4d8ef2) {
     return new Promise(async (_0x4c8f65, _0x3abd2f) => {
         const _0x9a2baa = _0x1883;
@@ -769,6 +797,7 @@ function updatePlan(_0x6276a9, _0x4d8ef2) {
         }
     });
 }
+
 function daysDiff(_0x5dbd14) {
     const _0x2614d9 = _0x1883;
     if (!_0x5dbd14) return 0x0;
@@ -778,12 +807,13 @@ function daysDiff(_0x5dbd14) {
         _0x2810c7 = Math[_0x2614d9(0x1f3)](_0x23f48f / (0x3e8 * 0x3c * 0x3c * 0x18));
     return _0x2810c7 < 0x0 ? 0x0 : _0x2810c7;
 }
+
 function returnTrain(_0x38956b) {
     return new Promise(_0x593b70 => {
         const _0x22bd7d = _0x1883;
         try {
-            _0x1007c6[_0x22bd7d(0x222)](_0x38956b, (_0x4a547a, _0xc54596) => {
-  const _0x572109 = _0x22bd7d;
+            _0x1007c6[_0x22bd7d(0x222)](_0x38956b, function (_0x4a547a, _0xc54596) {
+                const _0x572109 = _0x22bd7d;
                 if (_0xc54596) {
                     console[_0x572109(0x1d3)]({
                         'err': _0xc54596
@@ -798,7 +828,7 @@ function returnTrain(_0x38956b) {
                     'success': !![],
                     'text': _0x4a547a
                 });
-});
+            });
         } catch (_0x29ec75) {
             console[_0x22bd7d(0x1d3)](_0x29ec75), _0x593b70({
                 'success': ![],
@@ -807,6 +837,7 @@ function returnTrain(_0x38956b) {
         }
     });
 }
+
 function returnImageText(_0x1a6e2c) {
     return new Promise(async _0x14b987 => {
         try {
@@ -823,6 +854,7 @@ function returnImageText(_0x1a6e2c) {
         }
     });
 }
+
 function validateUrl(_0x2225d4) {
     const _0x39877d = _0x1883;
     var _0x36feb1 = /^(https?:\/\/)?([\w.-]+)\.([a-z]{2,})(\/\S*)?$/i;
@@ -856,6 +888,7 @@ async function processUrlAndConvertToText(_0x374da1, _0x2dd492 = 0x4e20) {
         'msg': 'Invalid URL'
     };
 }
+
 function readAndProcessConversations(_0xd42015) {
     return new Promise((_0x46fe65, _0x2c6cae) => {
         const _0x4c1fc9 = _0x1883;
